@@ -83,17 +83,17 @@ You can give permission with below method.
 ```kotlin
 bot.requestReadNotification()
 ```
-### or just checking permission accept.
+### or...just checking permission accepted.
 ```kotlin
 bot.checkNotificationPermission()
 ```
 
 # Reply
-You can send reply something room
+You can reply something room.
 ```kotlin
 bot.replyRoom("성빈", "안녕 성빈!")
 ```
-### or...you can reply use `Notification.Action`
+### or...you can reply use `Notification.Action`.
 ```kotlin
 bot.reply(action, "성빈은 사람이다.")
 ```
@@ -113,6 +113,6 @@ checkNotificationPermission(): Boolean
 ```
 
 # Tip
-**all methods is support `method-chaining`.
+**all methods is support `method-chaining`.**
 
 # Happy Coding :)
