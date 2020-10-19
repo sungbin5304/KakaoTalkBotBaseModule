@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.github.sungbin5304:KakaoTalkBotBaseModule:Tag'
+  implementation 'com.github.sungbin5304:KakaoTalkBotBaseModule:{version}'
 }
 ```
 
