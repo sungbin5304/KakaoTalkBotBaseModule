@@ -62,7 +62,7 @@ Now, you can start your bot.
 
 -----
 
-# You can black `room` or `sender`
+# Black `room` or `sender`
 ### method
 ```kotlin
 bot.addBlack(type: Type, value: String)
@@ -74,14 +74,45 @@ bot.addBlack(type: Type, value: String)
 
 ### Example
 ```kotlin
-.addBlack(Type.SENDER, "코콩")
+bot.addBlack(Type.SENDER, "코콩")
 ```
 
 # Permission
 `KakaoTalkBot` is require `Notification Listener Service Permission`. <br/>
 You can give permission with below method.
 ```kotlin
-.requestReadNotification()
+bot.requestReadNotification()
+```
+### or just checking permission accept.
+```kotlin
+bot.checkNotificationPermission()
 ```
 
+# Reply
+You can send reply something room
+```kotlin
+bot.replyRoom("성빈", "안녕 성빈!")
+```
+### or...you can reply use `Notification.Action`
+```kotlin
+bot.reply(action, "성빈은 사람이다.")
+```
+-----
+
 # all methods
+```kotlin
+setBotListener(botListener: OnKakaoBotListener): KakaoBot
+setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
+requestReadNotification(): KakaoBot
+removeBlack(type: Type, value: String): KakaoBot
+addKakaoTalkPackage(value: String): KakaoBot
+replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
+reply(action: Notification.Action, message: String, exception: (Exception) -> Unit = {})
+
+checkNotificationPermission(): Boolean
+```
+
+# Tip
+**all methods is support `method-chaining`.
+
+# Happy Coding :)
