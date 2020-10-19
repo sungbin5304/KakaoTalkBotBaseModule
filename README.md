@@ -115,6 +115,6 @@ checkNotificationPermission(): Boolean
 ```
 
 # Tip
-**all methods is support `method-chaining`.**
+**All methods is support `method-chaining`.**
 
 # Happy Coding :)
