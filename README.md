@@ -22,4 +22,37 @@ dependencies {
 ```
 
 # How to Use?
-1. Create 
+1. Create `KakaoBot()` instance.
+2. Add bot listener (just follow below example code)
+```kotlin
+.setBotListener(object : OnKakaoBotListener {
+    override fun onMessageReceive(
+        sender: String,
+        message: String,
+        room: String,
+        isGroupChat: Boolean,
+        action: Notification.Action,
+        profileImage: Bitmap,
+        packageName: String,
+        bot: KakaoBot
+    ) {
+        log(sender, message, room, isGroupChat, action, profileImage, packageName)
+        // if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
+        bot.replyRoom("TEST", "AAAA", { Log.w("AAAA", "없는방!") })
+    }
+    override fun onBotCreate(bot: KakaoBot) {
+        log("bot service create")
+    }
+    override fun onBotDestroy(bot: KakaoBot) {
+        log("bot service destory")
+    }
+})
+```
+### or...you can just add `onMessageReceive` listener with `lambda-function`.
+```kotlin
+setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
+  if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
+}
+```
+3. **finish!** <br/>
+Now, you can start your bot.
