@@ -183,6 +183,10 @@ class KakaoBot : NotificationListenerService() {
         }
     }
 
+    fun addKakaoTalkPackage(value: String) {
+        kakaoTalkList.add(value)
+    }
+
     private fun chatHook(
         sender: String,
         message: String,
