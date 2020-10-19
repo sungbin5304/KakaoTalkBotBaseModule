@@ -63,7 +63,7 @@ Now, you can start your bot.
 -----
 
 # Black `room` or `sender`
-### method
+### Method
 ```kotlin
 bot.addBlack(type: Type, value: String)
 ```
@@ -99,7 +99,7 @@ bot.reply(action, "성빈은 사람이다.")
 ```
 -----
 
-# all methods
+# All methods
 ```kotlin
 setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
