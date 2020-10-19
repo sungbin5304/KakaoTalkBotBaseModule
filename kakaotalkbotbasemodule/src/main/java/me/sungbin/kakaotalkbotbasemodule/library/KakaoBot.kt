@@ -168,6 +168,7 @@ class KakaoBot : NotificationListenerService() {
         ).contains(context.packageName)
 
 
+    // todo: 데이터 저장되게 하기
     fun addBlack(type: Type, value: String) {
         when (type) {
             Type.ROOM -> blackRoom.add(value)
