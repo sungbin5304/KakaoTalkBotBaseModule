@@ -22,10 +22,13 @@ dependencies {
 ```
 
 # How to Use?
-1. Create `KakaoBot()` instance.
-2. Add bot listener (just follow below example code)
+## 1. Create `KakaoBot()` instance.
 ```kotlin
-.setBotListener(object : OnKakaoBotListener {
+val bot = KakaoBot()
+```
+## 2. Add bot listener (just follow below example code)
+```kotlin
+bot.setBotListener(object : OnKakaoBotListener {
     override fun onMessageReceive(
         sender: String,
         message: String,
@@ -50,9 +53,35 @@ dependencies {
 ```
 ### or...you can just add `onMessageReceive` listener with `lambda-function`.
 ```kotlin
-setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
+bot.setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
   if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
 }
 ```
-3. **finish!** <br/>
+## 3. **finish!** <br/>
 Now, you can start your bot.
+
+-----
+
+# You can black `room` or `sender`
+### method
+```kotlin
+bot.addBlack(type: Type, value: String)
+```
+
+### Type
+1. `ROOM`
+2. `SENDER`
+
+### Example
+```kotlin
+.addBlack(Type.SENDER, "코콩")
+```
+
+# Permission
+`KakaoTalkBot` is require `Notification Listener Service Permission`. <br/>
+You can give permission with below method.
+```kotlin
+.requestReadNotification()
+```
+
+# all methods
