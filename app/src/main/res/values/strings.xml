@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KakaoTalkBotBaseModule</string>
+    <string name="main_start_service">서비스 시작</string>
 </resources>

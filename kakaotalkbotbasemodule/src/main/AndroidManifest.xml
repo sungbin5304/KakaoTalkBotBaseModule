@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.sungbin.kakaotalkbotbasemodule.library">
 
-    <application>
+    <application android:name=".KakaoBotModule">
 
         <service
             android:name=".KakaoBot"
