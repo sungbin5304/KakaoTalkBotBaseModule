@@ -9,13 +9,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBot
 import me.sungbin.kakaotalkbotbasemodule.library.OnKakaoBotListener
+import me.sungbin.kakaotalkbotbasemodule.library.Type
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        KakaoBot().requestReadNotification()
+
+        val bot = KakaoBot()
+        bot.addBlack(Type.SENDER, "")
+        bot.requestReadNotification()
             .setBotListener(object : OnKakaoBotListener {
                 override fun onMessageReceive(
                     sender: String,

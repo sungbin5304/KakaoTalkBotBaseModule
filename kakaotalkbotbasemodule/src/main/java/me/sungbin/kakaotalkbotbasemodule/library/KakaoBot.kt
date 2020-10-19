@@ -169,22 +169,25 @@ class KakaoBot : NotificationListenerService() {
 
 
     // todo: 데이터 저장되게 하기
-    fun addBlack(type: Type, value: String) {
+    fun addBlack(type: Type, value: String): KakaoBot {
         when (type) {
             Type.ROOM -> blackRoom.add(value)
             Type.SENDER -> blackSender.add(value)
         }
+        return this
     }
 
-    fun removeBlack(type: Type, value: String) {
+    fun removeBlack(type: Type, value: String): KakaoBot {
         when (type) {
             Type.ROOM -> blackRoom.remove(value)
             Type.SENDER -> blackSender.remove(value)
         }
+        return this
     }
 
-    fun addKakaoTalkPackage(value: String) {
+    fun addKakaoTalkPackage(value: String): KakaoBot {
         kakaoTalkList.add(value)
+        return this
     }
 
     private fun chatHook(
