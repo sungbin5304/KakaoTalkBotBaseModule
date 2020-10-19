@@ -66,6 +66,7 @@ Now, you can start your bot.
 ### Method
 ```kotlin
 bot.addBlack(type: Type, value: String)
+bot.removeBlack(type: Type, value: String)
 ```
 
 ### Type
@@ -104,6 +105,7 @@ bot.reply(action, "성빈은 사람이다.")
 setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
 requestReadNotification(): KakaoBot
+addBlack(type: Type, value: String): KakaoBot
 removeBlack(type: Type, value: String): KakaoBot
 addKakaoTalkPackage(value: String): KakaoBot
 replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
