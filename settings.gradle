@@ -1,0 +1,3 @@
+include ':kakaotalkbotbasemodule'
+include ':app'
+rootProject.name = "KakaoTalkBotBaseModule"
