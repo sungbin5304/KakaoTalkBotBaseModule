@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         KakaoBot()
-            .addBlack(Type.SENDER, "")
+            .addBlack(Type.SENDER, "코콩")
             .requestReadNotification()
             .setBotListener(object : OnKakaoBotListener {
                 override fun onMessageReceive(
