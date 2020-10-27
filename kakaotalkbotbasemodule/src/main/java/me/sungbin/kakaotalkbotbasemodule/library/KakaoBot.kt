@@ -20,8 +20,8 @@ import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.blackS
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.botListener
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.context
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.kakaoTalkList
+import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.power
 import java.util.*
-
 
 class KakaoBot : NotificationListenerService() {
 
@@ -37,12 +37,14 @@ class KakaoBot : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         super.onNotificationPosted(sbn)
+        if (!power) return
         if (kakaoTalkList.contains(sbn.packageName)) {
             val wExt = Notification.WearableExtender(sbn.notification)
             for (action in wExt.actions) {
                 if (action.remoteInputs != null && action.remoteInputs.isNotEmpty()) {
-                    if (action.title.toString().toLowerCase(Locale.getDefault()).contains("reply")
-                        || action.title.toString()
+                    if (action.title.toString().toLowerCase(Locale.getDefault())
+                            .contains("reply") ||
+                        action.title.toString()
                             .toLowerCase(Locale.getDefault()).contains("답장")
                     ) {
                         val extras = sbn.notification.extras
@@ -72,8 +74,8 @@ class KakaoBot : NotificationListenerService() {
                                 noKakaoTalk = true
                             }
 
-                            if (noKakaoTalk || packageName != "com.kakao.talk"
-                                || kakaotalkVersion < 1907310
+                            if (noKakaoTalk || packageName != "com.kakao.talk" ||
+                                kakaotalkVersion < 1907310
                             ) {
                                 room = extras.getString("android.title")
                                 if (extras.get("android.text") !is String) {
@@ -88,7 +90,8 @@ class KakaoBot : NotificationListenerService() {
                                     ).toString()
                                     message = HtmlCompat.fromHtml(
                                         html.split("</b>")[1].split("</p>")[0]
-                                            .substring(1), HtmlCompat.FROM_HTML_MODE_COMPACT
+                                            .substring(1),
+                                        HtmlCompat.FROM_HTML_MODE_COMPACT
                                     ).toString()
                                 } else {
                                     sender = room
@@ -115,6 +118,11 @@ class KakaoBot : NotificationListenerService() {
                 }
             }
         }
+    }
+
+    fun setPower(power: Boolean): KakaoBot {
+        KakaoBotModule.power = power
+        return this
     }
 
     fun setBotListener(botListener: OnKakaoBotListener): KakaoBot {
@@ -166,7 +174,6 @@ class KakaoBot : NotificationListenerService() {
         NotificationManagerCompat.getEnabledListenerPackages(
             context
         ).contains(context.packageName)
-
 
     // todo: 데이터 저장되게 하기
     fun addBlack(type: Type, value: String): KakaoBot {

@@ -16,10 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val bot = KakaoBot()
-        bot.addBlack(Type.SENDER, "")
-        bot.requestReadNotification()
+        KakaoBot()
+            .addBlack(Type.SENDER, "")
+            .requestReadNotification()
             .setBotListener(object : OnKakaoBotListener {
                 override fun onMessageReceive(
                     sender: String,
@@ -33,18 +32,18 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     log(sender, message, room, isGroupChat, action, profileImage, packageName)
                     // if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
-                    bot.replyRoom("TEST", "AAAA", { Log.w("AAAA", "없는방!") })
+                    bot.replyRoom("TEST", "send message", { Log.w("error", "없는방!") })
                 }
 
                 override fun onBotCreate(bot: KakaoBot) {
-                    log("DDD")
+                    log("봇 서비스 시작됨")
                 }
 
                 override fun onBotDestroy(bot: KakaoBot) {
-                    log("FFF")
+                    log("봇 서비스 종료됨")
                 }
-
             })
+            .setPower(true)
 
         findViewById<Button>(R.id.btn_start).setOnClickListener {
             toast("이미 시작됨!!!! \uD83E\uDD2C")
