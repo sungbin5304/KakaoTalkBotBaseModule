@@ -8,7 +8,7 @@
 -----
 
 # What is `KakaoTalkBotBaseModule`?
-`KakaoTalkBotBaseModule` is a library designed for beginner Android developers to easily create KakaoTalk bot applications.
+`KakaoTalkBotBaseModule` is a library designed for beginner Android developers to easily create KakaoTalk ot applications.
 
 # Download
 ```gradle
