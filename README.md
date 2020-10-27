@@ -99,7 +99,7 @@ bot.replyRoom("성빈", "안녕 성빈!")
 bot.reply(action, "성빈은 사람이다.")
 ```
 
-# Bot Power
+# Bot `On/Off` control
 You can set bot on/off with `.setPower(boolean)` method.
 
 -----
