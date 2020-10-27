@@ -47,7 +47,7 @@ bot.setBotListener(object : OnKakaoBotListener {
         log("bot service create")
     }
     override fun onBotDestroy(bot: KakaoBot) {
-        log("bot service destory")
+        log("bot service destroy")
     }
 })
 ```
