@@ -98,6 +98,10 @@ bot.replyRoom("성빈", "안녕 성빈!")
 ```kotlin
 bot.reply(action, "성빈은 사람이다.")
 ```
+
+# Bot Power
+You can set bot on/off with `.setPower(boolean)` method.
+
 -----
 
 # All methods
@@ -110,9 +114,13 @@ removeBlack(type: Type, value: String): KakaoBot
 addKakaoTalkPackage(value: String): KakaoBot
 replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
 reply(action: Notification.Action, message: String, exception: (Exception) -> Unit = {})
+setPower(power: Boolean): KakaoBot
 
 checkNotificationPermission(): Boolean
 ```
+
+# TODO
+1. [ ] Save `Black` data
 
 # Tip
 **All methods is support `method-chaining`.**
