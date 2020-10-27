@@ -26,7 +26,7 @@ dependencies {
 ```kotlin
 val bot = KakaoBot()
 ```
-## 2. Add bot listener [[example]](https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/app/src/main/java/me/sungbin/kakaotalkbotbasemodule/MainActivity.kt#L19) code)
+## 2. Add bot listener [[example]](https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/app/src/main/java/me/sungbin/kakaotalkbotbasemodule/MainActivity.kt#L19)
 ```kotlin
 bot.setBotListener(object : OnKakaoBotListener {
     override fun onMessageReceive(
