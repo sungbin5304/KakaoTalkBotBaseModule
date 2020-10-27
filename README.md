@@ -17,15 +17,18 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.github.sungbin5304:KakaoTalkBotBaseModule:Tag'
+  implementation 'com.github.sungbin5304:KakaoTalkBotBaseModule:{version}'
 }
 ```
 
 # How to Use?
-1. Create `KakaoBot()` instance.
-2. Add bot listener (just follow below example code)
+## 1. Create `KakaoBot()` instance.
 ```kotlin
-.setBotListener(object : OnKakaoBotListener {
+val bot = KakaoBot()
+```
+## 2. Add bot listener (just follow below [example](https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/app/src/main/java/me/sungbin/kakaotalkbotbasemodule/MainActivity.kt) code)
+```kotlin
+bot.setBotListener(object : OnKakaoBotListener {
     override fun onMessageReceive(
         sender: String,
         message: String,
@@ -50,9 +53,68 @@ dependencies {
 ```
 ### or...you can just add `onMessageReceive` listener with `lambda-function`.
 ```kotlin
-setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
+bot.setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
   if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
 }
 ```
-3. **finish!** <br/>
+## 3. **finish!** <br/>
 Now, you can start your bot.
+
+-----
+
+# Black `room` or `sender`
+### Method
+```kotlin
+bot.addBlack(type: Type, value: String)
+bot.removeBlack(type: Type, value: String)
+```
+
+### Type
+1. `ROOM`
+2. `SENDER`
+
+### Example
+```kotlin
+bot.addBlack(Type.SENDER, "코콩")
+```
+
+# Permission
+`KakaoTalkBot` is require `Notification Listener Service Permission`. <br/>
+You can give permission with below method.
+```kotlin
+bot.requestReadNotification()
+```
+### or...just checking permission accepted.
+```kotlin
+bot.checkNotificationPermission()
+```
+
+# Reply
+You can reply something room.
+```kotlin
+bot.replyRoom("성빈", "안녕 성빈!")
+```
+### or...you can reply use `Notification.Action`.
+```kotlin
+bot.reply(action, "성빈은 사람이다.")
+```
+-----
+
+# All methods
+```kotlin
+setBotListener(botListener: OnKakaoBotListener): KakaoBot
+setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
+requestReadNotification(): KakaoBot
+addBlack(type: Type, value: String): KakaoBot
+removeBlack(type: Type, value: String): KakaoBot
+addKakaoTalkPackage(value: String): KakaoBot
+replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
+reply(action: Notification.Action, message: String, exception: (Exception) -> Unit = {})
+
+checkNotificationPermission(): Boolean
+```
+
+# Tip
+**All methods is support `method-chaining`.**
+
+# Happy Coding :)
