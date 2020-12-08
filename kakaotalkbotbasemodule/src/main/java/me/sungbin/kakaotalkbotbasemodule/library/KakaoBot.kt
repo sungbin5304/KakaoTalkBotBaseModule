@@ -131,7 +131,7 @@ class KakaoBot : NotificationListenerService() {
     }
 
     fun setMessageReceiveListener(
-        onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit
+        onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String, KakaoBot) -> Unit
     ): KakaoBot {
         botListener = object : OnKakaoBotListener {
             override fun onMessageReceive(
@@ -151,7 +151,8 @@ class KakaoBot : NotificationListenerService() {
                     isGroupChat,
                     action,
                     profileImage,
-                    packageName
+                    packageName,
+                    bot
                 )
             }
 
