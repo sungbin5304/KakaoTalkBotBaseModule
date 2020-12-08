@@ -2,7 +2,6 @@ package me.sungbin.kakaotalkbotbasemodule.library
 
 import android.app.Application
 import android.app.Notification
-import android.content.Context
 
 /**
  * Created by SungBin on 2020-10-19.
@@ -11,7 +10,6 @@ import android.content.Context
 class KakaoBotModule : Application() {
 
     companion object {
-        lateinit var context: Context
         var botListener: OnKakaoBotListener? = null
         var kakaoTalkList = arrayListOf("com.kakao.talk")
         var blackRoom = ArrayList<String>()
@@ -22,6 +20,5 @@ class KakaoBotModule : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
     }
 }

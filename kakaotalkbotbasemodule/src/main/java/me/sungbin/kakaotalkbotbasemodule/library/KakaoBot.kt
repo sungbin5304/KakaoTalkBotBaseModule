@@ -2,6 +2,7 @@ package me.sungbin.kakaotalkbotbasemodule.library
 
 import android.app.Notification
 import android.app.RemoteInput
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -18,15 +19,17 @@ import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.action
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.blackRoom
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.blackSender
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.botListener
-import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.context
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.kakaoTalkList
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.power
 import java.util.*
 
 class KakaoBot : NotificationListenerService() {
 
+    private lateinit var context: Context
+
     override fun onCreate() {
         super.onCreate()
+        context = applicationContext
         botListener?.onBotCreate(this)
     }
 
@@ -118,6 +121,10 @@ class KakaoBot : NotificationListenerService() {
                 }
             }
         }
+    }
+
+    fun init(context: Context) {
+         this.context = context
     }
 
     fun setPower(power: Boolean): KakaoBot {
