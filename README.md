@@ -106,6 +106,7 @@ You can set bot on/off with `.setPower(boolean)` method.
 
 # All methods
 ```kotlin
+init(context: Context)
 setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
 requestReadNotification(): KakaoBot
