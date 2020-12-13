@@ -112,7 +112,7 @@ class KakaoBot : NotificationListenerService() {
                         if (!actions.containsKey(room)) actions[room!!] = action
                         if (!blackRoom.contains(room) && !blackSender.contains(sender)) {
                             chatHook(
-                                sender!!, message!!, room!!, isGroupChat, action,
+                                sender!!, message!!.trim(), room!!, isGroupChat, action,
                                 sbn.notification.getLargeIcon().toBitmap(),
                                 sbn.packageName
                             )
@@ -124,7 +124,7 @@ class KakaoBot : NotificationListenerService() {
     }
 
     fun init(context: Context) {
-         this.context = context
+        this.context = context
     }
 
     fun setPower(power: Boolean): KakaoBot {
@@ -234,8 +234,8 @@ class KakaoBot : NotificationListenerService() {
     ) {
         try {
             reply(actions[room]!!, message, replyException)
-        } catch (e: Exception) {
-            roomNotFoundException(e)
+        } catch (exception: Exception) {
+            roomNotFoundException(exception)
         }
     }
 
@@ -249,8 +249,8 @@ class KakaoBot : NotificationListenerService() {
             )
             RemoteInput.addResultsToIntent(action.remoteInputs, sendIntent, msg)
             action.actionIntent.send(context, 0, sendIntent)
-        } catch (e: Exception) {
-            exception(e)
+        } catch (exception: Exception) {
+            exception(exception)
         }
     }
 
