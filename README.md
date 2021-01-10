@@ -79,7 +79,7 @@ bot.addBlack(Type.SENDER, "코콩")
 ```
 
 # Permission
-`KakaoTalkBot` is require `NotificationListenerService` Permission. <br/>
+`KakaoTalkBot` is require `NotificationListenerService` permission. <br/>
 You can give permission with below method.
 ```kotlin
 bot.requestReadNotification()
