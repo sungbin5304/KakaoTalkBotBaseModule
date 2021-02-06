@@ -64,7 +64,7 @@ Now, you can start your bot.
 ## Add `Custom Package`, `Black User` or `Black Room`
 > All data will saved!
 ```kotlin
-.addData(type: Type, value: String)
+bot.addData(type: Type, value: String)
 ```
 
 ### Type
