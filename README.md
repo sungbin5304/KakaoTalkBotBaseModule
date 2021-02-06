@@ -79,7 +79,7 @@ bot.addBlack(Type.SENDER, "코콩")
 ```
 
 # Permission
-`KakaoTalkBot` is require `Notification Listener Service Permission`. <br/>
+`KakaoTalkBot` is require `NotificationListenerService` permission. <br/>
 You can give permission with below method.
 ```kotlin
 bot.requestReadNotification()
@@ -106,6 +106,7 @@ You can set bot on/off with `.setPower(boolean)` method.
 
 # All methods
 ```kotlin
+init(context: Context)
 setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
 requestReadNotification(): KakaoBot
