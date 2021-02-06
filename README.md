@@ -1,7 +1,7 @@
 ![banner](https://raw.githubusercontent.com/sungbin5304/KakaoTalkBotBaseModule/master/banner.png)
 <p align="center">
   <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue"/></a>
-  <a href="https://jitpack.io/#sungbin5304/KakaoTalkBotBaseModule"><img alt="Download" src="https://jitpack.io/v/sungbin5304/KakaoTalkBotBaseModule.svg"/></a>
+  <a href='https://bintray.com/sungbin5304/maven/kakaotalkbotbasemodule/_latestVersion'><img src='https://api.bintray.com/packages/sungbin5304/maven/kakaotalkbotbasemodule/images/download.svg'></a>
   <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModuler"><img alt="Title" src="https://img.shields.io/badge/Module-KakaoTalkBot-ff69b4"/></a>
 </p><br>
 
@@ -12,20 +12,17 @@
 
 # Download
 ```gradle
-repositories {
-  maven { url 'https://jitpack.io' }
-}
-
 dependencies {
-  implementation 'com.github.sungbin5304:KakaoTalkBotBaseModule:{version}'
+  implementation 'me.sungbin:kakaotalkbotbasemodule:{version}'
 }
 ```
 
 # How to Use?
-## 1. Create `KakaoBot()` instance.
+## 1. Create `KakaoBot()` instance and init with `Context`.
 ```kotlin
-val bot = KakaoBot()
+val bot = KakaoBot().init(applicationContext)
 ```
+
 ## 2. Add bot listener [[example]](https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/app/src/main/java/me/sungbin/kakaotalkbotbasemodule/MainActivity.kt#L19)
 ```kotlin
 bot.setBotListener(object : OnKakaoBotListener {
@@ -51,18 +48,20 @@ bot.setBotListener(object : OnKakaoBotListener {
     }
 })
 ```
+
 ### or...you can just add `onMessageReceive` listener with `lambda-function`.
 ```kotlin
 bot.setMessageReceiveListener { sender, message, room, isGroupChat, action, profileImage, packageName, bot ->
   if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")
 }
 ```
+
 ## 3. **finish!** <br/>
 Now, you can start your bot.
 
 -----
 
-# Black `room` or `sender`
+# Add Custom Package, Black User, Black Room
 ### Method
 ```kotlin
 bot.addBlack(type: Type, value: String)
@@ -84,6 +83,7 @@ You can give permission with below method.
 ```kotlin
 bot.requestReadNotification()
 ```
+
 ### or...just checking permission accepted.
 ```kotlin
 bot.checkNotificationPermission()
@@ -110,7 +110,7 @@ init(context: Context)
 setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
 requestReadNotification(): KakaoBot
-addBlack(type: Type, value: String): KakaoBot
+addData(type: Type, value: String): KakaoBot
 removeBlack(type: Type, value: String): KakaoBot
 addKakaoTalkPackage(value: String): KakaoBot
 replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
@@ -121,7 +121,8 @@ checkNotificationPermission(): Boolean
 ```
 
 # TODO
-1. [ ] Save `Black` data
+1. [x] Save `Black` data
+2. [x] Save custom package data
 
 # Tip
 **All methods is support `method-chaining`.**
