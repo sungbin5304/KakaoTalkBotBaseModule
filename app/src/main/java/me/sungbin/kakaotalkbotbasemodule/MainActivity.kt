@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBot
 import me.sungbin.kakaotalkbotbasemodule.library.OnKakaoBotListener
-import me.sungbin.kakaotalkbotbasemodule.library.Type
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         KakaoBot()
-            .addBlack(Type.SENDER, "코콩")
+            .init(applicationContext)
             .requestReadNotification()
             .setBotListener(object : OnKakaoBotListener {
                 override fun onMessageReceive(
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                     action: Notification.Action,
                     profileImage: Bitmap,
                     packageName: String,
-                    bot: KakaoBot
+                    bot: KakaoBot,
                 ) {
                     log(sender, message, room, isGroupChat, action, profileImage, packageName)
                     // if (sender == "성빈") bot.reply(action, "성공 ㅎㅎ 2222222")

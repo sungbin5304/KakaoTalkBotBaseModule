@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2021. Sungbin Ji. All rights reserved.
+ *
+ * KakaoTalkBotBaseModule license is under the MIT license.
+ * SEE LICENSE: https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/LICENSE
+ */
+
 package me.sungbin.kakaotalkbotbasemodule.library
 
 import android.app.Notification
@@ -16,12 +23,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.text.HtmlCompat
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.actions
-import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.blackRoom
-import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.blackSender
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.botListener
-import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.kakaoTalkList
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.power
-import java.util.*
+import java.util.Locale
 
 class KakaoBot : NotificationListenerService() {
 
@@ -41,12 +45,12 @@ class KakaoBot : NotificationListenerService() {
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         super.onNotificationPosted(sbn)
         if (!power) return
-        if (kakaoTalkList.contains(sbn.packageName)) {
+        if (DataUtil.read(context, Type.PACKAGE).contains(sbn.packageName)) {
             val wExt = Notification.WearableExtender(sbn.notification)
             for (action in wExt.actions) {
                 if (action.remoteInputs != null && action.remoteInputs.isNotEmpty()) {
                     if (action.title.toString().toLowerCase(Locale.getDefault())
-                            .contains("reply") ||
+                        .contains("reply") ||
                         action.title.toString()
                             .toLowerCase(Locale.getDefault()).contains("답장")
                     ) {
@@ -84,7 +88,7 @@ class KakaoBot : NotificationListenerService() {
                                 if (extras.get("android.text") !is String) {
                                     val html = HtmlCompat.toHtml(
                                         extras.get("android.text")
-                                                as Spanned,
+                                            as Spanned,
                                         HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
                                     )
                                     sender = HtmlCompat.fromHtml(
@@ -110,7 +114,9 @@ class KakaoBot : NotificationListenerService() {
                         }
 
                         if (!actions.containsKey(room)) actions[room!!] = action
-                        if (!blackRoom.contains(room) && !blackSender.contains(sender)) {
+                        if (!DataUtil.read(context, Type.ROOM).contains(room.toString()) &&
+                            !DataUtil.read(context, Type.SENDER).contains(sender.toString())
+                        ) {
                             chatHook(
                                 sender!!, message!!.trim(), room!!, isGroupChat, action,
                                 sbn.notification.getLargeIcon().toBitmap(),
@@ -123,8 +129,10 @@ class KakaoBot : NotificationListenerService() {
         }
     }
 
-    fun init(context: Context) {
+    fun init(context: Context): KakaoBot {
         this.context = context
+        DataUtil.save(context, Type.PACKAGE, "com.kakao.talk")
+        return this
     }
 
     fun setPower(power: Boolean): KakaoBot {
@@ -138,7 +146,7 @@ class KakaoBot : NotificationListenerService() {
     }
 
     fun setMessageReceiveListener(
-        onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String, KakaoBot) -> Unit
+        onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String, KakaoBot) -> Unit,
     ): KakaoBot {
         botListener = object : OnKakaoBotListener {
             override fun onMessageReceive(
@@ -149,7 +157,7 @@ class KakaoBot : NotificationListenerService() {
                 action: Notification.Action,
                 profileImage: Bitmap,
                 packageName: String,
-                bot: KakaoBot
+                bot: KakaoBot,
             ) {
                 onMessageReceive(
                     sender,
@@ -183,25 +191,18 @@ class KakaoBot : NotificationListenerService() {
             context
         ).contains(context.packageName)
 
-    // todo: 데이터 저장되게 하기
-    fun addBlack(type: Type, value: String): KakaoBot {
-        when (type) {
-            Type.ROOM -> blackRoom.add(value)
-            Type.SENDER -> blackSender.add(value)
-        }
+    fun addData(type: Type, value: String): KakaoBot {
+        DataUtil.save(context, type, value)
         return this
     }
 
-    fun removeBlack(type: Type, value: String): KakaoBot {
-        when (type) {
-            Type.ROOM -> blackRoom.remove(value)
-            Type.SENDER -> blackSender.remove(value)
-        }
+    fun removeData(context: Context, type: Type, value: String): KakaoBot {
+        DataUtil.remove(context, type, value)
         return this
     }
 
-    fun addKakaoTalkPackage(value: String): KakaoBot {
-        kakaoTalkList.add(value)
+    fun clearData(context: Context): KakaoBot {
+        DataUtil.clear(context)
         return this
     }
 
@@ -212,7 +213,7 @@ class KakaoBot : NotificationListenerService() {
         isGroupChat: Boolean,
         action: Notification.Action,
         profileImage: Bitmap,
-        packageName: String
+        packageName: String,
     ) {
         botListener?.onMessageReceive(
             sender,
@@ -229,8 +230,8 @@ class KakaoBot : NotificationListenerService() {
     fun replyRoom(
         room: String,
         message: String,
-        roomNotFoundException: (Exception) -> Unit = {},
-        replyException: (Exception) -> Unit = {}
+        roomNotFoundException: Exception.() -> Unit = {},
+        replyException: Exception.() -> Unit = {},
     ) {
         try {
             reply(actions[room]!!, message, replyException)
@@ -239,7 +240,7 @@ class KakaoBot : NotificationListenerService() {
         }
     }
 
-    fun reply(action: Notification.Action, message: String, exception: (Exception) -> Unit = {}) {
+    fun reply(action: Notification.Action, message: String, exception: Exception.() -> Unit = {}) {
         try {
             val sendIntent = Intent()
             val msg = Bundle()
