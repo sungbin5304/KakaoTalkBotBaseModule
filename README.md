@@ -61,7 +61,8 @@ Now, you can start your bot.
 
 -----
 
-# Add `Custom Package`, `Black User` or `Black Room`
+## Add `Custom Package`, `Black User` or `Black Room`
+> All data will saved!
 ```kotlin
 .addData(type: Type, value: String)
 ```
@@ -71,7 +72,7 @@ Now, you can start your bot.
 2. `SENDER`
 3. `PACKAGE`
 
-# Permission
+## Permission
 `KakaoTalkBot` is require `NotificationListenerService` permission. <br/>
 You can give permission with below method.
 ```kotlin
@@ -83,7 +84,7 @@ bot.requestReadNotification()
 bot.checkNotificationPermission()
 ```
 
-# Reply
+## Reply
 You can reply something room.
 ```kotlin
 bot.replyRoom("성빈", "안녕 성빈!")
@@ -93,7 +94,7 @@ bot.replyRoom("성빈", "안녕 성빈!")
 bot.reply(action, "성빈은 사람이다.")
 ```
 
-# Bot `On/Off` control
+## Bot `On/Off` control
 You can set bot on/off with `.setPower(boolean)` method.
 
 -----
