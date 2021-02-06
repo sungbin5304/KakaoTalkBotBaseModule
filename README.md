@@ -1,6 +1,6 @@
 ![banner](https://raw.githubusercontent.com/sungbin5304/KakaoTalkBotBaseModule/master/banner.png)
 <p align="center">
-  <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue"/></a>
+  <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-green"/></a>
   <a href='https://bintray.com/sungbin5304/maven/kakaotalkbotbasemodule/_latestVersion'><img src='https://api.bintray.com/packages/sungbin5304/maven/kakaotalkbotbasemodule/images/download.svg'></a>
   <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModuler"><img alt="Title" src="https://img.shields.io/badge/Module-KakaoTalkBot-ff69b4"/></a>
 </p><br>
@@ -61,21 +61,15 @@ Now, you can start your bot.
 
 -----
 
-# Add Custom Package, Black User, Black Room
-### Method
+# Add `Custom Package`, `Black User` or `Black Room`
 ```kotlin
-bot.addBlack(type: Type, value: String)
-bot.removeBlack(type: Type, value: String)
+.addData(type: Type, value: String)
 ```
 
 ### Type
 1. `ROOM`
 2. `SENDER`
-
-### Example
-```kotlin
-bot.addBlack(Type.SENDER, "코콩")
-```
+3. `PACKAGE`
 
 # Permission
 `KakaoTalkBot` is require `NotificationListenerService` permission. <br/>
@@ -111,18 +105,19 @@ setBotListener(botListener: OnKakaoBotListener): KakaoBot
 setMessageReceiveListener(onMessageReceive: (String, String, String, Boolean, Notification.Action, Bitmap, String) -> Unit): KakaoBot
 requestReadNotification(): KakaoBot
 addData(type: Type, value: String): KakaoBot
-removeBlack(type: Type, value: String): KakaoBot
+removeData(type: Type, value: String): KakaoBot
+clearData()
 addKakaoTalkPackage(value: String): KakaoBot
-replyRoom(room: String, message: String, roomNotFoundException: (Exception) -> Unit = {}, replyException: (Exception) -> Unit = {})
-reply(action: Notification.Action, message: String, exception: (Exception) -> Unit = {})
+replyRoom(room: String, message: String, roomNotFoundException: Exception.() -> Unit = {}, replyException: Exception.() -> Unit = {})
+reply(action: Notification.Action, message: String, exception: Exception.() -> Unit = {})
 setPower(power: Boolean): KakaoBot
 
 checkNotificationPermission(): Boolean
 ```
 
 # TODO
-1. [x] Save `Black` data
-2. [x] Save custom package data
+1. [x] Save `Black` data.
+2. [x] Save custom package data.
 
 # Tip
 **All methods is support `method-chaining`.**
