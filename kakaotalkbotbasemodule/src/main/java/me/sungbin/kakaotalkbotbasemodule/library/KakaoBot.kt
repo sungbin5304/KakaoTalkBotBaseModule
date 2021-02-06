@@ -196,12 +196,12 @@ class KakaoBot : NotificationListenerService() {
         return this
     }
 
-    fun removeData(context: Context, type: Type, value: String): KakaoBot {
+    fun removeData(type: Type, value: String): KakaoBot {
         DataUtil.remove(context, type, value)
         return this
     }
 
-    fun clearData(context: Context): KakaoBot {
+    fun clearData(): KakaoBot {
         DataUtil.clear(context)
         return this
     }
