@@ -22,10 +22,10 @@ import android.text.Spanned
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.text.HtmlCompat
+import java.util.Locale
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.actions
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.botListener
 import me.sungbin.kakaotalkbotbasemodule.library.KakaoBotModule.Companion.power
-import java.util.Locale
 
 class KakaoBot : NotificationListenerService() {
 
@@ -33,7 +33,6 @@ class KakaoBot : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
         botListener?.onBotCreate(this)
     }
 
