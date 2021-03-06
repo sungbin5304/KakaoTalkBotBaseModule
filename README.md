@@ -1,7 +1,6 @@
 ![banner](https://raw.githubusercontent.com/sungbin5304/KakaoTalkBotBaseModule/master/banner.png)
 <p align="center"> 
   <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModule/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue"/></a>
-  <a href="https://jitpack.io/#jisungbin/kakaotalkbotbasemodule"><img alt="Version" src="https://jitpack.io/v/jisungbin/kakaotalkbotbasemodule.svg"/></a>
   <a href="https://github.com/sungbin5304/KakaoTalkBotBaseModuler"><img alt="Title" src="https://img.shields.io/badge/Module-KakaoTalkBot-ff69b4"/></a>
 </p><br>
 
@@ -10,7 +9,7 @@
 # What is `KakaoTalkBotBaseModule`?
 `KakaoTalkBotBaseModule` is a library designed for beginner Android developers to easily create KakaoTalk Bot applications.
 
-# Download
+# Download [![](https://jitpack.io/v/jisungbin/kakaotalkbotbasemodule.svg)](https://jitpack.io/#jisungbin/kakaotalkbotbasemodule)
 ```gradle
 repositories {
   maven { url 'https://jitpack.io' }
