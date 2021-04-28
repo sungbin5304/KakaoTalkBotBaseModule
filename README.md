@@ -17,7 +17,7 @@ repositories {
   maven { url 'https://jitpack.io' }
 }
 
-implementation 'com.github.jisungbin:kakaotalkbotbasemodule:{version}'
+implementation 'me.sungbin:kakaotalkbotbasemodule:{version}'
 ```
 
 # How to Use?
